@@ -10,7 +10,9 @@ Open `index.html` in Edge or Chrome. Choose one or more video clips, optionally 
 
 - Combine selected video clips into one WebM output.
 - Preview the selected clip sequence before export.
+- Set an in and out point for every clip and scrub across the combined project timeline.
 - Add a narration audio file and preview it with the clips.
+- Choose where narration starts in its source file and where it starts on the project timeline. Short narration ends while video continues; audio beyond the video duration is not included.
 - Mute the original video audio, adjust narration/music/original levels.
 - Add a title and timed text cards.
 - Optionally detect and skip long quiet sections.
