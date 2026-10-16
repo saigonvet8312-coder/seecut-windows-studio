@@ -1,28 +1,31 @@
-# SeeCut Windows Studio
+# Whiteboard Studio for Google Colab
 
-A lightweight browser-based video editor inspired by the SeeCut workflow. It is designed to run on Windows in Microsoft Edge or Google Chrome without installing a video-editing toolchain.
-
-## Run
-
-Open `index.html` in Edge or Chrome. Choose one or more video clips, optionally add a narration audio file and background music, preview the clip sequence, then export one combined WebM video.
+A self-contained Vietnamese whiteboard-video generator. The app and pipeline source in this repository are authored for this project; the notebook does not clone or run the Chalkboard repository.
 
 ## Features
 
-- Combine selected video clips into one WebM output.
-- Preview the selected clip sequence before export.
-- Set an in and out point for every clip and scrub across the combined project timeline.
-- Split a clip at the preview playhead, select any resulting timeline segment, and delete unwanted middle sections before export.
-- Add a narration audio file and preview it with the clips.
-- Choose where narration starts in its source file and where it starts on the project timeline. Short narration ends while video continues; audio beyond the video duration is not included.
-- Mute the original video audio, adjust narration/music/original levels.
-- Add a title and timed text cards.
-- Optionally detect and skip long quiet sections.
-- Process media locally in the browser; files are not uploaded by this page.
+- A Colab UI with progress for script generation, per-scene narration, scene drawing, and final assembly.
+- Ollama generates a Vietnamese script and a separate visual prompt plus diagram for each scene.
+- Piper creates a Vietnamese voice track for every scene.
+- Python/Pillow draws matching whiteboard scenes; FFmpeg syncs the voice and joins the scenes into one MP4.
+- Download buttons for the finished MP4 and the generated script JSON.
 
-## Notes
+## Run
 
-- Use a current version of Edge or Chrome.
-- Export runs in real time, so long videos take about as long as their playback duration.
-- The output is WebM. This is a simplified browser editor, not a port of the original SeeCut AI agent pipeline.
-- Silence detection is approximate. Review the preview and exported video before publishing.
-- The original SeeCut repository uses the PolyForm Noncommercial 1.0.0 license. This standalone browser project is independently written and does not include the original repository's source files.
+1. Upload the files in this folder to the root of your public GitHub repository: `chalkboard_colab.ipynb`, `whiteboard_studio.py`, `requirements.txt`, and `README.md`.
+2. Open `chalkboard_colab.ipynb` in Google Colab.
+3. Run the setup cells from top to bottom, then press **Tạo kịch bản và video** in the UI.
+4. Enter a Vietnamese topic. Watch the scene cards and progress update, then click **Tải video MP4**.
+
+The first run downloads the app dependencies, the Qwen2.5 3B model (about 1.9 GB), and the Vietnamese Piper voice into Colab. A fresh Colab runtime needs setup again.
+
+## Dependencies and ownership
+
+The app/pipeline code is in this repository. It uses Ollama, Piper TTS, FFmpeg, Pillow, Requests, and ipywidgets as external open-source tools/libraries, plus their model/voice files. Those are necessary for local language generation, speech, image rendering, and MP4 encoding. The visuals are whiteboard diagrams generated from each scene's prompt; this is not photorealistic text-to-video.
+
+## Colab notebook URL
+
+After uploading to the repository root, open:
+
+`https://colab.research.google.com/github/saigonvet8312-coder/colab-whiteboard/blob/main/chalkboard_colab.ipynb`
+
